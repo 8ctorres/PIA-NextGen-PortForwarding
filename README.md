@@ -1,11 +1,13 @@
-# PIA NextGen Servers Port Forwarding + Transmission support - Unofficial
-New PIA pfSense (Private Internet Access) port forwarding API script for next gen servers. Tested on pfSense 2.4.5-RELEASE-p1 (amd64) and transmission-daemon 2.94. 
+# PIA NextGen Servers Port Forwarding + qBittorrent support - Unofficial
+New PIA pfSense (Private Internet Access) port forwarding API script for next gen servers. Tested on pfSense 2.6.0-RELEASE (amd64) and qBittorrent 4.2.5 on Debian. 
 
-# **Issue introduced in 2.5.1: Regression #11805 breaks port forwarding. Please use 2.5.2.**
+## This guide is based on fm407's original guide for Transmission, and adapted for use with qBittorrent. See https://github.com/fm407/PIA-NextGen-PortForwarding
 
-# **Before starting make sure to have configured PIA on your pfSense according to this guide: https://blog.networkprofile.org/private-internet-access-vpn-on-pfsense/**
+## **Issue introduced in 2.5.1: Regression #11805 breaks port forwarding. Please use 2.5.2.**
 
-For a list of nextgen servers supporting port forwarding: https://github.com/fm407/PIA-NextGen-PortForwarding/blob/master/nextgen-portforward-servers.txt 
+## **Before starting make sure to have configured PIA on your pfSense according to this guide: https://blog.networkprofile.org/private-internet-access-vpn-on-pfsense/**
+
+For a list of nextgen servers supporting port forwarding: https://github.com/8ctorres/PIA-NextGen-PortForwarding/blob/master/nextgen-portforward-servers.txt 
 
 The scripts have variables that you must change in order for the script to work, make sure to read the scripts before running them.
 
@@ -105,10 +107,10 @@ touch pia-pfSense.sh
 chmod u+x pia-pfSense.sh
 vi pia-pfSense.sh
 ```
--Paste the code from https://github.com/fm407/PIA-NextGen-PortForwarding/blob/master/pia-pfSense.sh OR just download it and chmod +x it.</br>
+-Paste the code from https://github.com/8ctorres/PIA-NextGen-PortForwarding/blob/master/pia-pfSense.sh OR just download it and chmod +x it.</br>
 **!!! Some customization is necessary. Please read the script. It will need at minimum your PIA user and pass and the Transmission rpc user/pass !!!**</br>
 
-Put https://github.com/fm407/PIA-NextGen-PortForwarding/blob/master/pia-portforwarding-rc in `/usr/local/etc/rc.d` (rename to pia-portforwarding) and chmod +x it or just:</br>
+Put https://github.com/8ctorres/PIA-NextGen-PortForwarding/blob/master/pia-portforwarding-rc in `/usr/local/etc/rc.d` (rename to pia-portforwarding) and chmod +x it or just:</br>
 
 ```
 touch /usr/local/etc/rc.d/piaportforwarding
@@ -149,24 +151,9 @@ And paste the following: `piaportforwarding_enable="YES"`
 -(Optional) Disable SSH via WebUI under System -> Advanced => un-tick "Enable Secure Shell"</br>
 </br>
 
-# **II. Transmission host side**</br>
--This part is for a Debian 10 host, your mileage may vary depending on the distro you use for your Transmission host.</br>
--If there is something already configured on your side please read the steps anyway just to be sure there are no tiny difference.</br>
-
-**1.Secure Transmission RPC Protocol**</br>
--STOP the transmission daemon by `systemctl stop transmission`</br>
--Edit /etc/transmission-daemon/settings.json</br>
--Note that the location of settings.json may vary. The above path is from Debian 10.</br>
--Update/add following parameters. Replace username, password. Ensure that IP address of your pfSense is in whitelist, you can whitelist additional IPs.</br>
-
-```
-"rpc-authentication-required": true,
-"rpc-username": "SomeUserName",
-"rpc-password": "SomePassword",
-"rpc-whitelist": "127.0.0.1,10.10.10.1,10.10.10.5",
-```
-
--Start the transmission service again `systemctl start transmission`</br>
+# **II. qBittorrent host side**</br>
+For qBittorrent make sure you have enabled the WebUI in the "WebUI" tab in the Options menu, and set the port, username and password to the same that you set on the pia-pfsense.sh script.
+I use HTTP for the WebUI so if you use HTTPS make sure to modify the script accordingly (the -k option for curl may be useful for you).
 
 **2.Restart OpenVPN in pfSense**</br>
 <img src="imgs/pia-restart.png"></br>
