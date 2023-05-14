@@ -6,7 +6,7 @@
 
 name="piaportforwarding"
 rcvar="${name}_enable"
-command="/home/custom/piaportforward/pia-pfSense.sh"
+command="/root/piaportforward/pia-pfSense.sh"
 command_interpreter="/bin/sh"
 pf_user=root
 start_cmd="/usr/sbin/daemon -f -u $pf_user $command"
