@@ -143,5 +143,3 @@ I use HTTP for the WebUI so if you use HTTPS make sure to modify the script acco
 <img src="imgs/pia-restart.png"></br>
 -Wait for ~15secs and check Status -> System logs to see results</br>
 <img src="imgs/pia-status.png"></br>
--All OK, port changed</br>
-<img src="imgs/pia-success.png"></br>
