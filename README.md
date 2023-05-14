@@ -16,6 +16,8 @@ Now you can follow this guide:
 # **I. pfSense side**
 
 **1.Make sure you have SSH root access to your pfSense machine**</br>
+You can login as the "admin" user directly, or use a different user that has Shell access permissions and then "su" or "sudo".
+This depends on your particular configuration, check the manual if you're not sure how pfSense users work.
 
 **2.Create Alias for port forward**</br>
 -Go to Firewall -> Aliases -> Ports</br>
