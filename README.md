@@ -25,10 +25,10 @@ This depends on your particular configuration, check the manual if you're not su
 -Give it the current port (if you have it) or non-zero value</br>
 <img src="imgs/port-alias.png"></br>
 
-**3.Create Alias for Transmission IP address**</br>
+**3.Create Alias for qBitTorrent IP address**</br>
 -Go to Firewall -> Aliases -> IP</br>
 -Create new port with name "TorrentingIP"</br>
--Define IP or FQDN of your Transmisson daemon server</br>
+-Define IP or FQDN of your qBitTorrent server</br>
 <img src="imgs/ip-alias.png"></br>
 
 **4.Create NAT rule for port-forward using the ALIAS instead of specific port/IP**</br>
@@ -92,7 +92,7 @@ vi pia-pfSense.sh
 ```
 -You can create the piaportforward directory either in the /root folder like I did, in your user's HOME folder or really wherever you like it</br>
 -Paste the code from https://github.com/8ctorres/PIA-NextGen-PortForwarding/blob/master/pia-pfSense.sh OR just download it and chmod +x it.</br>
-**!!! Some customization is necessary. Please read the script. It will need at minimum your PIA user and pass and the Transmission rpc user/pass !!!**</br>
+**!!! Some customization is necessary. Please read the script. It will need at minimum your PIA user and pass and the qBittorrent webui user/pass !!!**</br>
 
 Put https://github.com/8ctorres/PIA-NextGen-PortForwarding/blob/master/pia-portforwarding-rc in `/usr/local/etc/rc.d` (rename to pia-portforwarding) and chmod +x it or just:</br>
 
